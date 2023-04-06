@@ -8,6 +8,7 @@ import { Description } from './components/Description';
 import { Checklist } from './components/Checklist';
 import { About } from './components/About';
 import { Pet } from './components/Pet';
+import { Note } from './components/Note';
 import { RequireAuth } from './RequireAuth';
 import { Authenticator } from '@aws-amplify/ui-react';
 import "@aws-amplify/ui-react/styles.css";
@@ -24,6 +25,7 @@ function MyRoutes() {
           <Route path="/description" element={<Description />} />
           <Route path="/checklist" element={<Checklist />} />
           <Route path="/pet" element={<RequireAuth><Pet /></RequireAuth>} />
+          <Route path="/note" element={<RequireAuth><Note /></RequireAuth>} />
 
         </Route>
       </Routes>

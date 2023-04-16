@@ -3,7 +3,8 @@ import { useAuthenticator, Tabs, TabItem } from '@aws-amplify/ui-react';
 
 export function Layout() {
 
-    const { route, signOut } = useAuthenticator(context => [
+    const { user, route, signOut } = useAuthenticator(context => [
+        context.user,
         context.route,
         context.signOut
     ]);
@@ -36,23 +37,8 @@ export function Layout() {
                         <TabItem title="Logout" onClick={() => logOut()} />
                     )}
                 </Tabs>
-
-                {/* <Button onClick={() => navigate("/")}>Home</Button>
-                <Button onClick={() => navigate("/about")}>About Us</Button>
-                <Button onClick={() => navigate("/description")}>Description</Button>
-                <Button onClick={() => navigate("/checklist")}>Checklist</Button>
-                <Button onClick={() => navigate("/pet")}>Pet</Button>
-                <Button onClick={() => navigate("/note")}>Note</Button>
-
-                {route !== "authenticated" ? (
-                    <button onClick={() => navigate("/login")}>Login</button>
-
-                ) : (
-                    <button onClick={() => logOut()}>Logout</button>
-                )} */}
-
             </nav>
-            {/* <span>{route === "authenticated" ? "You are logged in" : "You are not logged in"}</span> */}
+            <span>{route === "authenticated" ? `Welcome ${user.username}` : ""}</span>
             <Outlet />
 
         </>

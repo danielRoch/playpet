@@ -1,6 +1,47 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const getPet = /* GraphQL */ `
+  query GetPet($id: ID!) {
+    getPet(id: $id) {
+      id
+      name
+      petType
+      description
+      city
+      state
+      email
+      image
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const listPets = /* GraphQL */ `
+  query ListPets(
+    $filter: ModelPetFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listPets(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        name
+        petType
+        description
+        city
+        state
+        email
+        image
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+    }
+  }
+`;
 export const getNote = /* GraphQL */ `
   query GetNote($id: ID!) {
     getNote(id: $id) {
@@ -27,43 +68,6 @@ export const listNotes = /* GraphQL */ `
         image
         createdAt
         updatedAt
-      }
-      nextToken
-    }
-  }
-`;
-export const getPost = /* GraphQL */ `
-  query GetPost($id: ID!) {
-    getPost(id: $id) {
-      id
-      name
-      description
-      location
-      email
-      image
-      createdAt
-      updatedAt
-      owner
-    }
-  }
-`;
-export const listPosts = /* GraphQL */ `
-  query ListPosts(
-    $filter: ModelPostFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listPosts(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        name
-        description
-        location
-        email
-        image
-        createdAt
-        updatedAt
-        owner
       }
       nextToken
     }

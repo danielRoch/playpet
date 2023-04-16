@@ -10,7 +10,7 @@ import { About } from './components/About';
 import { Pet } from './components/Pet';
 import { Note } from './components/Note';
 import { RequireAuth } from './RequireAuth';
-import { Authenticator } from '@aws-amplify/ui-react';
+import { Authenticator, ThemeProvider } from '@aws-amplify/ui-react';
 import "@aws-amplify/ui-react/styles.css";
 
 
@@ -37,7 +37,9 @@ function App() {
 
   return (
     <Authenticator.Provider>
-      <MyRoutes />
+      <ThemeProvider>
+        <MyRoutes />
+      </ThemeProvider>
     </Authenticator.Provider>
   );
 }

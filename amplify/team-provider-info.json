@@ -15,11 +15,11 @@
       "auth": {
         "playpetf5d310e3": {}
       },
-      "api": {
-        "playpet": {}
-      },
       "storage": {
         "imagestorage": {}
+      },
+      "api": {
+        "playpet": {}
       }
     }
   }

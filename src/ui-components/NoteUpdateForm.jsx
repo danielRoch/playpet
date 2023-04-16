@@ -56,7 +56,7 @@ export default function NoteUpdateForm(props) {
   React.useEffect(resetStateValues, [noteRecord]);
   const validations = {
     name: [{ type: "Required" }],
-    description: [],
+    description: [{ type: "Required" }],
     image: [],
   };
   const runValidationTasks = async (
@@ -162,7 +162,7 @@ export default function NoteUpdateForm(props) {
       ></TextField>
       <TextField
         label="Description"
-        isRequired={false}
+        isRequired={true}
         isReadOnly={false}
         value={description}
         onChange={(e) => {

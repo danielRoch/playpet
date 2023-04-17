@@ -65,7 +65,9 @@ export function Pet() {
             name: form.get("name"),
             petType: form.get("petType"),
             description: form.get("description"),
-            location: form.get("location"),
+            city: form.get("city"),
+            state: form.get("state"),
+            email: form.get("email"),
             image: image.name,
         };
         if (!!data.image) await Storage.put(data.name, image);
@@ -138,57 +140,57 @@ export function Pet() {
                         placeholder="Please Select the State"
                         isRequired={true}
                     >
-                        <option value="AL">Alabama (AL)</option>
-                        <option value="AK">Alaska (AK)</option>
-                        <option value="AZ">Arizona (AZ)</option>
-                        <option value="AR">Arkansas (AR)</option>
-                        <option value="CA">California (CA)</option>
-                        <option value="CO">Colorado (CO)</option>
-                        <option value="CT">Connecticut (CT)</option>
-                        <option value="DE">Delaware (DE)</option>
-                        <option value="DC">District Of Columbia (DC)</option>
-                        <option value="FL">Florida (FL)</option>
-                        <option value="GA">Georgia (GA)</option>
-                        <option value="HI">Hawaii (HI)</option>
-                        <option value="ID">Idaho (ID)</option>
-                        <option value="IL">Illinois (IL)</option>
-                        <option value="IN">Indiana (IN)</option>
-                        <option value="IA">Iowa (IA)</option>
-                        <option value="KS">Kansas (KS)</option>
-                        <option value="KY">Kentucky (KY)</option>
-                        <option value="LA">Louisiana (LA)</option>
-                        <option value="ME">Maine (ME)</option>
-                        <option value="MD">Maryland (MD)</option>
-                        <option value="MA">Massachusetts (MA)</option>
-                        <option value="MI">Michigan (MI)</option>
-                        <option value="MN">Minnesota (MN)</option>
-                        <option value="MS">Mississippi (MS)</option>
-                        <option value="MO">Missouri (MO)</option>
-                        <option value="MT">Montana (MT)</option>
-                        <option value="NE">Nebraska (NE)</option>
-                        <option value="NV">Nevada (NV)</option>
-                        <option value="NH">New Hampshire (NH)</option>
-                        <option value="NJ">New Jersey (NJ)</option>
-                        <option value="NM">New Mexico (NM)</option>
-                        <option value="NY">New York (NY)</option>
-                        <option value="NC">North Carolina (NC)</option>
-                        <option value="ND">North Dakota (ND)</option>
-                        <option value="OH">Ohio (OH)</option>
-                        <option value="OK">Oklahoma (OK)</option>
-                        <option value="OR">Oregon (OR)</option>
-                        <option value="PA">Pennsylvania (PA)</option>
-                        <option value="RI">Rhode Island (RI)</option>
-                        <option value="SC">South Carolina (SC)</option>
-                        <option value="SD">South Dakota (SD)</option>
-                        <option value="TN">Tennessee (TN)</option>
-                        <option value="TX">Texas (TX)</option>
-                        <option value="UT">Utah (UT)</option>
-                        <option value="VT">Vermont (VT)</option>
-                        <option value="VA">Virginia (VA)</option>
-                        <option value="WA">Washington (WA)</option>
-                        <option value="WV">West Virginia (WV)</option>
-                        <option value="WI">Wisconsin (WI)</option>
-                        <option value="WY">Wyoming (WY)</option>
+                        <option value="al">Alabama (AL)</option>
+                        <option value="ak">Alaska (AK)</option>
+                        <option value="az">Arizona (AZ)</option>
+                        <option value="ar">Arkansas (AR)</option>
+                        <option value="ca">California (CA)</option>
+                        <option value="co">Colorado (CO)</option>
+                        <option value="ct">Connecticut (CT)</option>
+                        <option value="de">Delaware (DE)</option>
+                        <option value="dc">District Of Columbia (DC)</option>
+                        <option value="fl">Florida (FL)</option>
+                        <option value="ga">Georgia (GA)</option>
+                        <option value="hi">Hawaii (HI)</option>
+                        <option value="id">Idaho (ID)</option>
+                        <option value="il">Illinois (IL)</option>
+                        <option value="in">Indiana (IN)</option>
+                        <option value="ia">Iowa (IA)</option>
+                        <option value="ks">Kansas (KS)</option>
+                        <option value="ky">Kentucky (KY)</option>
+                        <option value="la">Louisiana (LA)</option>
+                        <option value="me">Maine (ME)</option>
+                        <option value="md">Maryland (MD)</option>
+                        <option value="ma">Massachusetts (MA)</option>
+                        <option value="mi">Michigan (MI)</option>
+                        <option value="mn">Minnesota (MN)</option>
+                        <option value="ms">Mississippi (MS)</option>
+                        <option value="mo">Missouri (MO)</option>
+                        <option value="mt">Montana (MT)</option>
+                        <option value="ne">Nebraska (NE)</option>
+                        <option value="nv">Nevada (NV)</option>
+                        <option value="nh">New Hampshire (NH)</option>
+                        <option value="nj">New Jersey (NJ)</option>
+                        <option value="nm">New Mexico (NM)</option>
+                        <option value="ny">New York (NY)</option>
+                        <option value="nc">North Carolina (NC)</option>
+                        <option value="nd">North Dakota (ND)</option>
+                        <option value="oh">Ohio (OH)</option>
+                        <option value="ok">Oklahoma (OK)</option>
+                        <option value="or">Oregon (OR)</option>
+                        <option value="pa">Pennsylvania (PA)</option>
+                        <option value="ri">Rhode Island (RI)</option>
+                        <option value="sc">South Carolina (SC)</option>
+                        <option value="sd">South Dakota (SD)</option>
+                        <option value="tn">Tennessee (TN)</option>
+                        <option value="tx">Texas (TX)</option>
+                        <option value="ut">Utah (UT)</option>
+                        <option value="vt">Vermont (VT)</option>
+                        <option value="va">Virginia (VA)</option>
+                        <option value="wa">Washington (WA)</option>
+                        <option value="wv">West Virginia (WV)</option>
+                        <option value="wi">Wisconsin (WI)</option>
+                        <option value="wy">Wyoming (WY)</option>
                     </SelectField>
 
                     <TextField
@@ -251,9 +253,13 @@ export function Pet() {
                                         {item.petType}
                                     </Badge>
                                     <Badge
-                                        key={item.location}
+                                        key={item.state}
                                     >
-                                        {item.location}
+                                        {item.city ?
+                                            `${item.city},` + `${item.state}`.toUpperCase()
+                                            : `${item.state}`.toUpperCase()
+                                        }
+                                        {/* {item.state} */}
                                     </Badge>
                                 </Flex>
                                 <Divider padding="xs" />

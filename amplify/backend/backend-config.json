@@ -51,6 +51,41 @@
       "service": "Cognito"
     }
   },
+  "geo": {
+    "PetMap": {
+      "accessType": "AuthorizedAndGuestUsers",
+      "dependsOn": [
+        {
+          "attributes": [
+            "UserPoolId"
+          ],
+          "category": "auth",
+          "resourceName": "playpetf5d310e3"
+        }
+      ],
+      "isDefault": true,
+      "mapStyle": "VectorEsriNavigation",
+      "providerPlugin": "awscloudformation",
+      "service": "Map"
+    },
+    "placeIndex1fb4c192": {
+      "accessType": "AuthorizedAndGuestUsers",
+      "dataProvider": "Esri",
+      "dataSourceIntendedUse": "SingleUse",
+      "dependsOn": [
+        {
+          "attributes": [
+            "UserPoolId"
+          ],
+          "category": "auth",
+          "resourceName": "playpetf5d310e3"
+        }
+      ],
+      "isDefault": true,
+      "providerPlugin": "awscloudformation",
+      "service": "PlaceIndex"
+    }
+  },
   "storage": {
     "imagestorage": {
       "dependsOn": [],

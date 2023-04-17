@@ -20,6 +20,10 @@
       },
       "api": {
         "playpet": {}
+      },
+      "geo": {
+        "placeIndex1fb4c192": {},
+        "PetMap": {}
       }
     }
   }

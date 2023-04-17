@@ -1,0 +1,12 @@
+{
+  "authRoleName": {
+    "Ref": "AuthRoleName"
+  },
+  "unauthRoleName": {
+    "Ref": "UnauthRoleName"
+  },
+  "indexName": "placeIndex1fb4c192",
+  "dataProvider": "Esri",
+  "dataSourceIntendedUse": "SingleUse",
+  "isDefault": true
+}

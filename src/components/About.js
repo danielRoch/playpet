@@ -24,7 +24,7 @@ export function About() {
                         DISCLAIMER: I will be speaking of dogs since those are the pets that I have experience with.
                     </Text>
                     <Text>
-                        I chose to create PlayPet because after COVID many pets were not well acclimated to people or other pets since they could not go out due to their owners not being able to go out. PlayPet is meant to bring people and animals closer to together and allow pets to get all the playtime they want.
+                        I chose to create PlayPet because after COVID many pets were not well acclimated to people or other pets since they colid not go out due to their owners not being able to go out. PlayPet is meant to bring people and animals closer to together and allow pets to get all the playtime they want.
                     </Text>
                 </View>
                 <View className="ltext">
@@ -33,6 +33,8 @@ export function About() {
                 <View className="ltext">
                     <Text>
                         The main technologies used to create PlayPet are:
+                    </Text>
+                    <View>
                         <ul>
                             <li>JavaScript</li>
                             <li>React</li>
@@ -40,7 +42,7 @@ export function About() {
                             <li>AWS DynamoDB</li>
                             <li>AWS S3</li>
                         </ul>
-                    </Text>
+                    </View>
                 </View>
                 <View className="ltext">
                     <ul><Heading level={4}>What was Learned?</Heading></ul>

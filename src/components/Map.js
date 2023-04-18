@@ -138,7 +138,7 @@ export function Map() {
     }
 
     return (
-        <View>
+        <View style={{ marginLeft: "5%", marginRight: "5%" }}>
             <Flex
                 direction="row"
                 justifyContent="flex-start"

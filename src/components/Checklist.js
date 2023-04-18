@@ -11,7 +11,8 @@ export function Checklist() {
                 <Expander type="multiple">
                     <ExpanderItem title="Database Usage" value="checklist-1">
                         I used AWS Amplify to create my website and with that I can add a GraphQL API that connects to a DynamoDB Table to store my data.
-                        I then use a GraphQL query to fetch all my pet posts from the table. This can be seen in action on the <Link onClick={() => navigate("/pet")}>Pet</Link> page.
+                        I then use a GraphQL query to fetch all my pet posts from the table. This can be seen in action on the <Link onClick={() => navigate("/pet")}>Pet</Link> page where all
+                        the pet posts are listed.
                     </ExpanderItem>
                     <ExpanderItem title="AJAX Usage" value="checklist-2">
                         On the <Link onClick={() => navigate("/pet")}>Pet</Link> page, you can see posts by users. Users can only delete posts that they made and when they create or delete a post
@@ -21,6 +22,9 @@ export function Checklist() {
                         The Amplify team created a UI framework called Amplify UI that adds different UI components or builds on the primitive ones. I used the Badge, Button, Card, Collection,
                         Divider, Flex, Heading, Image, ScrollView, SelectField, Text, TextAreaField, and TextField components all on the <Link onClick={() => navigate("/pet")}>Pet</Link> page, but I used many
                         different components all over my website for its UI.
+                        I also used react-map-gl to add map integration on the <Link onClick={() => navigate("/map")}>Map</Link> page. It displays a map of the US with markers on the location for the posts.
+                        The location retrieval will attempt to get a location upon creation of a post. If you click on one of the posts listed to the right, it will change the viewport of the map to zoom in
+                        on the location of that post's marker.
                     </ExpanderItem>
                     <ExpanderItem title="JavaScript Usage" value="checklist-4">
                         On the <Link onClick={() => navigate("/pet")}>Pet</Link> page, javascript is used to display a delete button on only the logged in user's posts. I do this by checking if the

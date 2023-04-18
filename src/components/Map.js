@@ -74,8 +74,8 @@ export function Map() {
     }, []);
 
     // Move the viewport of the map to be the location of the post
-    function moveViewPort(longitude, latitude) {
-        mapRef.current.flyTo({ center: [longitude, latitude], zoom: 10 })
+    function moveViewPort(longitude, latitude, zoom = 10) {
+        mapRef.current.flyTo({ center: [longitude, latitude], zoom: zoom })
     }
 
 
@@ -139,6 +139,7 @@ export function Map() {
 
     return (
         <View style={{ marginLeft: "5%", marginRight: "5%" }}>
+            <Button onClick={() => moveViewPort(-100, 41.5, 2)}>Reset Map View</Button>
             <Flex
                 direction="row"
                 justifyContent="flex-start"

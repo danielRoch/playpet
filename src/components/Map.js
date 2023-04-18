@@ -74,7 +74,12 @@ export function Map() {
     }, []);
 
     // Move the viewport of the map to be the location of the post
-    function moveViewPort(longitude, latitude, zoom = 10) {
+    function moveViewPort(longitude = -100, latitude = 41.5, zoom = 10) {
+        if (longitude === null || latitude === null) {
+            console.log("Error: Could not get location data")
+            mapRef.current.flyTo({ center: [-100, 41.5], zoom: 3 })
+            return
+        }
         mapRef.current.flyTo({ center: [longitude, latitude], zoom: zoom })
     }
 
@@ -165,8 +170,8 @@ export function Map() {
                             {pets.map((pet) => (
                                 <MarkerWithPopup
                                     key={pet.id}
-                                    latitude={pet.latitude}
-                                    longitude={pet.longitude}
+                                    latitude={pet.latitude === null ? 41.5 : pet.latitude}
+                                    longitude={pet.longitude === null ? -100 : pet.longitude}
                                     title={pet.name}
                                     description={pet.description}
                                 />
@@ -209,7 +214,7 @@ export function Map() {
                                                     key={item.state}
                                                 >
                                                     {item.city ?
-                                                        `${item.city},` + `${item.state}`.toUpperCase()
+                                                        `${item.city}, ` + `${item.state}`.toUpperCase()
                                                         : `${item.state}`.toUpperCase()
                                                     }
                                                 </Badge>

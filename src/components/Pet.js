@@ -28,8 +28,6 @@ export function Pet() {
     const { user } = useAuthenticator(context => [context.user]);
     const [pets, setPets] = useState([]);
     const [hasError, setHasError] = useState(false)
-    const [lat, setLat] = useState();
-    const [long, setLong] = useState();
 
     // Get all the pet posts on page load
     useEffect(() => {
@@ -68,30 +66,6 @@ export function Pet() {
         createClient();
         console.log("Pet Reloaded");
     }, []);
-
-    async function getCoord(place) {
-        console.log(`Place: ${place}`);
-        const params = {
-            IndexName: "placeIndex1fb4c192-staging",
-            Text: place,
-        };
-
-        await client.searchPlaceIndexForText(params, (err, data) => {
-            if (err) console.error(err);
-            if (data) {
-                console.log(`Data: ${data}`);
-                const coordinates = data.Results[0].Place.Geometry.Point;
-                // mapRef.current.flyTo({ center: [coordinates[0], coordinates[1]], zoom: 10 })
-
-                console.log(`${place} Coord: ${coordinates}`)
-                setLat(coordinates[1])
-                setLong(coordinates[0])
-
-                console.log(`Lat: ${lat}`)
-                console.log(`Long: ${long}`)
-            }
-        });
-    }
 
     async function getLat(place) {
         console.log(`Place: ${place}`);
@@ -172,10 +146,6 @@ export function Pet() {
         // await getCoord(location);
         longitude = await getLong(location);
         latitude = await getLat(location)
-
-        // if (latitude === undefined || longitude === undefined) {
-        //     getCoord(form.get("state"));
-        // }
 
         const data = {
             name: form.get("name"),

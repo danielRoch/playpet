@@ -11,8 +11,8 @@ type Pet @model @auth(rules: [
   state: String!
   email: String!
   image: String
-  longitude: String!
-  latitude: String!
+  longitude: String
+  latitude: String
 }
 
 enum petEnum {

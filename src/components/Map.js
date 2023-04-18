@@ -1,9 +1,8 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { Amplify, API, Storage, Geo, Auth, Signer } from 'aws-amplify';
+import React, { useState, useEffect, useRef } from 'react';
+import { API, Storage, Auth, Signer } from 'aws-amplify';
 import {
     Badge,
     Button,
-    Card,
     Collection,
     Divider,
     Flex,
@@ -13,7 +12,6 @@ import {
     MapView,
     ScrollView,
     Text,
-    TextField,
     useAuthenticator,
     View
 } from "@aws-amplify/ui-react"
@@ -21,10 +19,9 @@ import {
 import Location from "aws-sdk/clients/location";
 import awsconfig from "../aws-exports";
 
-import { NavigationControl, Marker, Popup, useMap } from "react-map-gl";
+import { NavigationControl, Marker, Popup } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { listPets } from '../graphql/queries';
-import LocationList from "./LocationList";
 
 // Map Information
 const transformRequest = (credentials) => (url, resourceType) => {
@@ -46,26 +43,6 @@ const transformRequest = (credentials) => (url, resourceType) => {
     // Don't Sign URL
     return { url: url || "" };
 };
-
-function Search(props) {
-    const [place, setPlace] = useState("");
-
-    const handleChange = (event) => {
-        setPlace(event.target.value);
-    }
-
-    const handleClick = (event) => {
-        event.preventDefault();
-        props.searchPlace(place)
-    }
-
-    return (
-        <View>
-            <TextField placeholder='Search for Places' label="Place" labelHidden value={place} onChange={handleChange} />
-            <Button onClick={handleClick}>Search</Button>
-        </View>
-    )
-}
 
 export function Map() {
 
@@ -216,67 +193,32 @@ export function Map() {
                             }
                         >
                             {(item, index) => (
-                                <Button isFullWidth={true} onClick={() => moveViewPort(item.longitude, item.latitude)}>
-                                    <View>
-                                        <Flex direction="column">
+                                <Button key={item.id} isFullWidth={true} onClick={() => moveViewPort(item.longitude, item.latitude)}>
+                                    <Flex direction="column">
+                                        <Flex direction="row" wrap="wrap">
+                                            <Heading>{item.name}</Heading>
+                                            <Text>By: {item.owner}</Text>
                                             <Flex direction="row" wrap="wrap">
-                                                <Heading>{item.name}</Heading>
-                                                <Text>By: {item.owner}</Text>
-                                                <Flex direction="row" wrap="wrap">
-                                                    <Badge
-                                                        key={item.petType}
-                                                    >
-                                                        {item.petType}
-                                                    </Badge>
-                                                    <Badge
-                                                        key={item.state}
-                                                    >
-                                                        {item.city ?
-                                                            `${item.city},` + `${item.state}`.toUpperCase()
-                                                            : `${item.state}`.toUpperCase()
-                                                        }
-                                                    </Badge>
-                                                </Flex>
+                                                <Badge
+                                                    key={item.petType}
+                                                >
+                                                    {item.petType}
+                                                </Badge>
+                                                <Badge
+                                                    key={item.state}
+                                                >
+                                                    {item.city ?
+                                                        `${item.city},` + `${item.state}`.toUpperCase()
+                                                        : `${item.state}`.toUpperCase()
+                                                    }
+                                                </Badge>
                                             </Flex>
-                                            <Divider />
-                                            <Text width="455px" isTruncated={true}>{item.description}</Text>
                                         </Flex>
-                                    </View>
+                                        <Divider />
+                                        <Text width="455px" isTruncated={true}>{item.description}</Text>
+                                    </Flex>
                                 </Button>
-                                // <Card
-                                //     key={item.id || item.name}
-                                //     width="100%"
-                                //     variation="outlined"
-                                // >
-                                //     <Flex direction="row" >
-                                //         <Flex direction="column">
-                                //             <Flex direction="row" wrap="wrap">
-                                //                 <Heading>{item.name}</Heading>
-                                //                 <Text>By: {item.owner}</Text>
-                                //                 <Flex direction="row" wrap="wrap">
-                                //                     <Badge
-                                //                         key={item.petType}
-                                //                     >
-                                //                         {item.petType}
-                                //                     </Badge>
-                                //                     <Badge
-                                //                         key={item.state}
-                                //                     >
-                                //                         {item.city ?
-                                //                             `${item.city},` + `${item.state}`.toUpperCase()
-                                //                             : `${item.state}`.toUpperCase()
-                                //                         }
-                                //                     </Badge>
-                                //                 </Flex>
-                                //             </Flex>
-                                //             <Divider />
-                                //             <Text width="455px" isTruncated={true}>{item.description}</Text>
-                                //         </Flex>
-                                //         {/* <Button width="20%" variation="primary" onClick={() => moveViewPort(item.longitude, item.latitude)}>Go To Post Location</Button> */}
-                                //     </Flex>
-                                // </Card>
                             )}
-
                         </Collection>
                     </ScrollView>
                 </View>

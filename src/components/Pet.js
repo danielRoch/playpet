@@ -15,7 +15,6 @@ import {
     TextAreaField,
     TextField,
     useAuthenticator,
-    useTheme,
     View
 } from "@aws-amplify/ui-react"
 import { listPets } from '../graphql/queries';
@@ -26,12 +25,9 @@ import awsconfig from "../aws-exports";
 
 export function Pet() {
 
-    const { tokens } = useTheme()
     const { user } = useAuthenticator(context => [context.user]);
     const [pets, setPets] = useState([]);
     const [hasError, setHasError] = useState(false)
-    const [lastCoords, setLastCoords] = useState();
-    const [lastParams, setLastParams] = useState();
     const [lat, setLat] = useState();
     const [long, setLong] = useState();
 
@@ -80,28 +76,61 @@ export function Pet() {
             Text: place,
         };
 
-        // Logic to try and save on Place Indexing calls
-        if (params === lastParams) {
-            console.log(`Location Search Parameters the same as previous, sending previous coordinates.`)
-            return lastCoords
-        }
-        setLastParams(params);
-
-        client.searchPlaceIndexForText(params, (err, data) => {
+        await client.searchPlaceIndexForText(params, (err, data) => {
             if (err) console.error(err);
             if (data) {
                 console.log(`Data: ${data}`);
                 const coordinates = data.Results[0].Place.Geometry.Point;
                 // mapRef.current.flyTo({ center: [coordinates[0], coordinates[1]], zoom: 10 })
 
-                setLastCoords(coordinates);
                 console.log(`${place} Coord: ${coordinates}`)
                 setLat(coordinates[1])
                 setLong(coordinates[0])
 
                 console.log(`Lat: ${lat}`)
                 console.log(`Long: ${long}`)
-                return coordinates;
+            }
+        });
+    }
+
+    async function getLat(place) {
+        console.log(`Place: ${place}`);
+        const params = {
+            IndexName: "placeIndex1fb4c192-staging",
+            Text: place,
+        };
+
+        await client.searchPlaceIndexForText(params, (err, data) => {
+            if (err) console.error(err);
+            if (data) {
+                console.log(`Data: ${data}`);
+                const coordinates = data.Results[0].Place.Geometry.Point;
+                // mapRef.current.flyTo({ center: [coordinates[0], coordinates[1]], zoom: 10 })
+
+                console.log(`${place} Coord: ${coordinates}`)
+                return coordinates[1]
+
+            }
+        });
+    }
+
+    async function getLong(place) {
+        console.log(`Place: ${place}`);
+        const params = {
+            IndexName: "placeIndex1fb4c192-staging",
+            Text: place,
+        };
+
+        await client.searchPlaceIndexForText(params, (err, data) => {
+            if (err) console.error(err);
+            if (data) {
+                console.log(`Data: ${data}`);
+                const coordinates = data.Results[0].Place.Geometry.Point;
+                // mapRef.current.flyTo({ center: [coordinates[0], coordinates[1]], zoom: 10 })
+
+                console.log(`${place} Coord: ${coordinates}`)
+                return coordinates[0]
+
             }
         });
     }
@@ -140,16 +169,13 @@ export function Pet() {
             location = `${form.get("state")}`
         }
 
-        // Have to be called individually, returns "cannot read properties of undefined"
-        await getCoord(location)
-        longitude = long
-        latitude = lat
+        // await getCoord(location);
+        longitude = await getLong(location);
+        latitude = await getLat(location)
 
-        // longitude = getCoord(location)[0]
-        // latitude = getCoord(location)[1]
-
-        console.log(`Long Type: ` + longitude)
-        console.log(`Lat Type: ` + latitude)
+        // if (latitude === undefined || longitude === undefined) {
+        //     getCoord(form.get("state"));
+        // }
 
         const data = {
             name: form.get("name"),
@@ -183,7 +209,6 @@ export function Pet() {
 
     return (
         <View className="App">
-            <Button onClick={() => getCoord("Atlanta, ga")}>Test</Button>
             <Heading level={1}>PlayPet Post Submission</Heading>
             <View style={{ marginLeft: "25%", marginRight: "25%" }}>
                 <View as="form" margin="3rem 0" onSubmit={createPet}>

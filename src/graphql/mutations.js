@@ -15,6 +15,8 @@ export const createPet = /* GraphQL */ `
       state
       email
       image
+      longitude
+      latitude
       createdAt
       updatedAt
       owner
@@ -35,6 +37,8 @@ export const updatePet = /* GraphQL */ `
       state
       email
       image
+      longitude
+      latitude
       createdAt
       updatedAt
       owner
@@ -55,54 +59,11 @@ export const deletePet = /* GraphQL */ `
       state
       email
       image
+      longitude
+      latitude
       createdAt
       updatedAt
       owner
-    }
-  }
-`;
-export const createNote = /* GraphQL */ `
-  mutation CreateNote(
-    $input: CreateNoteInput!
-    $condition: ModelNoteConditionInput
-  ) {
-    createNote(input: $input, condition: $condition) {
-      id
-      name
-      description
-      image
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const updateNote = /* GraphQL */ `
-  mutation UpdateNote(
-    $input: UpdateNoteInput!
-    $condition: ModelNoteConditionInput
-  ) {
-    updateNote(input: $input, condition: $condition) {
-      id
-      name
-      description
-      image
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const deleteNote = /* GraphQL */ `
-  mutation DeleteNote(
-    $input: DeleteNoteInput!
-    $condition: ModelNoteConditionInput
-  ) {
-    deleteNote(input: $input, condition: $condition) {
-      id
-      name
-      description
-      image
-      createdAt
-      updatedAt
     }
   }
 `;

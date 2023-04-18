@@ -8,9 +8,11 @@ type Pet @model @auth(rules: [
   petType: petEnum!
   description: String!
   city: String
-  state: stateEnum!
+  state: String!
   email: String!
   image: String
+  longitude: String!
+  latitude: String!
 }
 
 enum petEnum {
@@ -18,65 +20,4 @@ enum petEnum {
   cat
   rabbit
   hamster
-}
-
-enum stateEnum {
-  al
-  ak
-  az
-  ar
-  ca
-  co
-  ct
-  de
-  dc
-  fl
-  ga
-  hi
-  id
-  il
-  in
-  ia
-  ks
-  ky
-  la
-  me
-  md
-  ma
-  mi
-  mn
-  ms
-  mo
-  mt
-  ne
-  nv
-  nh
-  nj
-  nm
-  ny
-  nc
-  nd
-  oh
-  ok
-  or
-  pa
-  ri
-  sc
-  sd
-  tn
-  tx
-  ut
-  vt
-  va
-  wa
-  wv
-  wi
-  wy
-}
-
-type Note @model{
-  id: ID!
-  name: String!
-  description: String!
-  image: String
 }

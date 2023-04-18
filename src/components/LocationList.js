@@ -1,38 +1,9 @@
-// import { useEffect, useState } from "react";
-// import { Collection } from "@aws-amplify/ui-react";
-// import { API } from "aws-amplify";
-// import { listPets } from '../graphql/queries';
+import { useRef } from "react";
 
 function LocationList(props) {
 
-    // const [pets, setPets] = useState([]);
-
-    // useEffect(() => {
-    //     fetchPets();
-    // }, []);
-
-    // async function fetchPets() {
-    //     const apiData = await API.graphql({ query: listPets });
-    //     const petsFromAPI = apiData.data.listPets.items;
-    //     await Promise.all(
-    //         petsFromAPI.map(async (pet) => {
-    //             if (pet.image) {
-    //                 const url = await Storage.get(pet.name);
-    //                 pet.image = url;
-    //             }
-    //             return pet;
-    //         })
-    //     );
-    //     setPets(petsFromAPI);
-    // }
-
-    const onClickFunction = (location) => {
-        const newViewport = {
-            longitude: parseFloat(location.longitude),
-            latitude: parseFloat(location.latitude),
-            zoom: 2
-        }
-        props.changeViewport(newViewport);
+    const onClickFunction = (pet) => {
+        props.mapRef.current.flyTo({ center: [pet.longitude, pet.latitude], zoom: 10 })
     }
 
     return (
@@ -46,3 +17,5 @@ function LocationList(props) {
         </div>
     )
 }
+
+export default LocationList;

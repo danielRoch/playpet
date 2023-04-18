@@ -15,6 +15,8 @@ export const onCreatePet = /* GraphQL */ `
       state
       email
       image
+      longitude
+      latitude
       createdAt
       updatedAt
       owner
@@ -35,6 +37,8 @@ export const onUpdatePet = /* GraphQL */ `
       state
       email
       image
+      longitude
+      latitude
       createdAt
       updatedAt
       owner
@@ -55,45 +59,11 @@ export const onDeletePet = /* GraphQL */ `
       state
       email
       image
+      longitude
+      latitude
       createdAt
       updatedAt
       owner
-    }
-  }
-`;
-export const onCreateNote = /* GraphQL */ `
-  subscription OnCreateNote($filter: ModelSubscriptionNoteFilterInput) {
-    onCreateNote(filter: $filter) {
-      id
-      name
-      description
-      image
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onUpdateNote = /* GraphQL */ `
-  subscription OnUpdateNote($filter: ModelSubscriptionNoteFilterInput) {
-    onUpdateNote(filter: $filter) {
-      id
-      name
-      description
-      image
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onDeleteNote = /* GraphQL */ `
-  subscription OnDeleteNote($filter: ModelSubscriptionNoteFilterInput) {
-    onDeleteNote(filter: $filter) {
-      id
-      name
-      description
-      image
-      createdAt
-      updatedAt
     }
   }
 `;

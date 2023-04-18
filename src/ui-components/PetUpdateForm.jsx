@@ -37,6 +37,8 @@ export default function PetUpdateForm(props) {
     state: "",
     email: "",
     image: "",
+    longitude: "",
+    latitude: "",
   };
   const [name, setName] = React.useState(initialValues.name);
   const [petType, setPetType] = React.useState(initialValues.petType);
@@ -47,6 +49,8 @@ export default function PetUpdateForm(props) {
   const [state, setState] = React.useState(initialValues.state);
   const [email, setEmail] = React.useState(initialValues.email);
   const [image, setImage] = React.useState(initialValues.image);
+  const [longitude, setLongitude] = React.useState(initialValues.longitude);
+  const [latitude, setLatitude] = React.useState(initialValues.latitude);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     const cleanValues = petRecord
@@ -59,6 +63,8 @@ export default function PetUpdateForm(props) {
     setState(cleanValues.state);
     setEmail(cleanValues.email);
     setImage(cleanValues.image);
+    setLongitude(cleanValues.longitude);
+    setLatitude(cleanValues.latitude);
     setErrors({});
   };
   const [petRecord, setPetRecord] = React.useState(petModelProp);
@@ -78,6 +84,8 @@ export default function PetUpdateForm(props) {
     state: [{ type: "Required" }],
     email: [{ type: "Required" }],
     image: [],
+    longitude: [],
+    latitude: [],
   };
   const runValidationTasks = async (
     fieldName,
@@ -112,6 +120,8 @@ export default function PetUpdateForm(props) {
           state,
           email,
           image,
+          longitude,
+          latitude,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -174,6 +184,8 @@ export default function PetUpdateForm(props) {
               state,
               email,
               image,
+              longitude,
+              latitude,
             };
             const result = onChange(modelFields);
             value = result?.name ?? value;
@@ -204,6 +216,8 @@ export default function PetUpdateForm(props) {
               state,
               email,
               image,
+              longitude,
+              latitude,
             };
             const result = onChange(modelFields);
             value = result?.petType ?? value;
@@ -255,6 +269,8 @@ export default function PetUpdateForm(props) {
               state,
               email,
               image,
+              longitude,
+              latitude,
             };
             const result = onChange(modelFields);
             value = result?.description ?? value;
@@ -285,6 +301,8 @@ export default function PetUpdateForm(props) {
               state,
               email,
               image,
+              longitude,
+              latitude,
             };
             const result = onChange(modelFields);
             value = result?.city ?? value;
@@ -299,10 +317,10 @@ export default function PetUpdateForm(props) {
         hasError={errors.city?.hasError}
         {...getOverrideProps(overrides, "city")}
       ></TextField>
-      <SelectField
+      <TextField
         label="State"
-        placeholder="Please select an option"
-        isDisabled={false}
+        isRequired={true}
+        isReadOnly={false}
         value={state}
         onChange={(e) => {
           let { value } = e.target;
@@ -315,6 +333,8 @@ export default function PetUpdateForm(props) {
               state: value,
               email,
               image,
+              longitude,
+              latitude,
             };
             const result = onChange(modelFields);
             value = result?.state ?? value;
@@ -328,263 +348,7 @@ export default function PetUpdateForm(props) {
         errorMessage={errors.state?.errorMessage}
         hasError={errors.state?.hasError}
         {...getOverrideProps(overrides, "state")}
-      >
-        <option
-          children="Al"
-          value="al"
-          {...getOverrideProps(overrides, "stateoption0")}
-        ></option>
-        <option
-          children="Ak"
-          value="ak"
-          {...getOverrideProps(overrides, "stateoption1")}
-        ></option>
-        <option
-          children="Az"
-          value="az"
-          {...getOverrideProps(overrides, "stateoption2")}
-        ></option>
-        <option
-          children="Ar"
-          value="ar"
-          {...getOverrideProps(overrides, "stateoption3")}
-        ></option>
-        <option
-          children="Ca"
-          value="ca"
-          {...getOverrideProps(overrides, "stateoption4")}
-        ></option>
-        <option
-          children="Co"
-          value="co"
-          {...getOverrideProps(overrides, "stateoption5")}
-        ></option>
-        <option
-          children="Ct"
-          value="ct"
-          {...getOverrideProps(overrides, "stateoption6")}
-        ></option>
-        <option
-          children="De"
-          value="de"
-          {...getOverrideProps(overrides, "stateoption7")}
-        ></option>
-        <option
-          children="Dc"
-          value="dc"
-          {...getOverrideProps(overrides, "stateoption8")}
-        ></option>
-        <option
-          children="Fl"
-          value="fl"
-          {...getOverrideProps(overrides, "stateoption9")}
-        ></option>
-        <option
-          children="Ga"
-          value="ga"
-          {...getOverrideProps(overrides, "stateoption10")}
-        ></option>
-        <option
-          children="Hi"
-          value="hi"
-          {...getOverrideProps(overrides, "stateoption11")}
-        ></option>
-        <option
-          children="Id"
-          value="id"
-          {...getOverrideProps(overrides, "stateoption12")}
-        ></option>
-        <option
-          children="Il"
-          value="il"
-          {...getOverrideProps(overrides, "stateoption13")}
-        ></option>
-        <option
-          children="In"
-          value="in"
-          {...getOverrideProps(overrides, "stateoption14")}
-        ></option>
-        <option
-          children="Ia"
-          value="ia"
-          {...getOverrideProps(overrides, "stateoption15")}
-        ></option>
-        <option
-          children="Ks"
-          value="ks"
-          {...getOverrideProps(overrides, "stateoption16")}
-        ></option>
-        <option
-          children="Ky"
-          value="ky"
-          {...getOverrideProps(overrides, "stateoption17")}
-        ></option>
-        <option
-          children="La"
-          value="la"
-          {...getOverrideProps(overrides, "stateoption18")}
-        ></option>
-        <option
-          children="Me"
-          value="me"
-          {...getOverrideProps(overrides, "stateoption19")}
-        ></option>
-        <option
-          children="Md"
-          value="md"
-          {...getOverrideProps(overrides, "stateoption20")}
-        ></option>
-        <option
-          children="Ma"
-          value="ma"
-          {...getOverrideProps(overrides, "stateoption21")}
-        ></option>
-        <option
-          children="Mi"
-          value="mi"
-          {...getOverrideProps(overrides, "stateoption22")}
-        ></option>
-        <option
-          children="Mn"
-          value="mn"
-          {...getOverrideProps(overrides, "stateoption23")}
-        ></option>
-        <option
-          children="Ms"
-          value="ms"
-          {...getOverrideProps(overrides, "stateoption24")}
-        ></option>
-        <option
-          children="Mo"
-          value="mo"
-          {...getOverrideProps(overrides, "stateoption25")}
-        ></option>
-        <option
-          children="Mt"
-          value="mt"
-          {...getOverrideProps(overrides, "stateoption26")}
-        ></option>
-        <option
-          children="Ne"
-          value="ne"
-          {...getOverrideProps(overrides, "stateoption27")}
-        ></option>
-        <option
-          children="Nv"
-          value="nv"
-          {...getOverrideProps(overrides, "stateoption28")}
-        ></option>
-        <option
-          children="Nh"
-          value="nh"
-          {...getOverrideProps(overrides, "stateoption29")}
-        ></option>
-        <option
-          children="Nj"
-          value="nj"
-          {...getOverrideProps(overrides, "stateoption30")}
-        ></option>
-        <option
-          children="Nm"
-          value="nm"
-          {...getOverrideProps(overrides, "stateoption31")}
-        ></option>
-        <option
-          children="Ny"
-          value="ny"
-          {...getOverrideProps(overrides, "stateoption32")}
-        ></option>
-        <option
-          children="Nc"
-          value="nc"
-          {...getOverrideProps(overrides, "stateoption33")}
-        ></option>
-        <option
-          children="Nd"
-          value="nd"
-          {...getOverrideProps(overrides, "stateoption34")}
-        ></option>
-        <option
-          children="Oh"
-          value="oh"
-          {...getOverrideProps(overrides, "stateoption35")}
-        ></option>
-        <option
-          children="Ok"
-          value="ok"
-          {...getOverrideProps(overrides, "stateoption36")}
-        ></option>
-        <option
-          children="Or"
-          value="or"
-          {...getOverrideProps(overrides, "stateoption37")}
-        ></option>
-        <option
-          children="Pa"
-          value="pa"
-          {...getOverrideProps(overrides, "stateoption38")}
-        ></option>
-        <option
-          children="Ri"
-          value="ri"
-          {...getOverrideProps(overrides, "stateoption39")}
-        ></option>
-        <option
-          children="Sc"
-          value="sc"
-          {...getOverrideProps(overrides, "stateoption40")}
-        ></option>
-        <option
-          children="Sd"
-          value="sd"
-          {...getOverrideProps(overrides, "stateoption41")}
-        ></option>
-        <option
-          children="Tn"
-          value="tn"
-          {...getOverrideProps(overrides, "stateoption42")}
-        ></option>
-        <option
-          children="Tx"
-          value="tx"
-          {...getOverrideProps(overrides, "stateoption43")}
-        ></option>
-        <option
-          children="Ut"
-          value="ut"
-          {...getOverrideProps(overrides, "stateoption44")}
-        ></option>
-        <option
-          children="Vt"
-          value="vt"
-          {...getOverrideProps(overrides, "stateoption45")}
-        ></option>
-        <option
-          children="Va"
-          value="va"
-          {...getOverrideProps(overrides, "stateoption46")}
-        ></option>
-        <option
-          children="Wa"
-          value="wa"
-          {...getOverrideProps(overrides, "stateoption47")}
-        ></option>
-        <option
-          children="Wv"
-          value="wv"
-          {...getOverrideProps(overrides, "stateoption48")}
-        ></option>
-        <option
-          children="Wi"
-          value="wi"
-          {...getOverrideProps(overrides, "stateoption49")}
-        ></option>
-        <option
-          children="Wy"
-          value="wy"
-          {...getOverrideProps(overrides, "stateoption50")}
-        ></option>
-      </SelectField>
+      ></TextField>
       <TextField
         label="Email"
         isRequired={true}
@@ -601,6 +365,8 @@ export default function PetUpdateForm(props) {
               state,
               email: value,
               image,
+              longitude,
+              latitude,
             };
             const result = onChange(modelFields);
             value = result?.email ?? value;
@@ -631,6 +397,8 @@ export default function PetUpdateForm(props) {
               state,
               email,
               image: value,
+              longitude,
+              latitude,
             };
             const result = onChange(modelFields);
             value = result?.image ?? value;
@@ -644,6 +412,70 @@ export default function PetUpdateForm(props) {
         errorMessage={errors.image?.errorMessage}
         hasError={errors.image?.hasError}
         {...getOverrideProps(overrides, "image")}
+      ></TextField>
+      <TextField
+        label="Longitude"
+        isRequired={false}
+        isReadOnly={false}
+        value={longitude}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              name,
+              petType,
+              description,
+              city,
+              state,
+              email,
+              image,
+              longitude: value,
+              latitude,
+            };
+            const result = onChange(modelFields);
+            value = result?.longitude ?? value;
+          }
+          if (errors.longitude?.hasError) {
+            runValidationTasks("longitude", value);
+          }
+          setLongitude(value);
+        }}
+        onBlur={() => runValidationTasks("longitude", longitude)}
+        errorMessage={errors.longitude?.errorMessage}
+        hasError={errors.longitude?.hasError}
+        {...getOverrideProps(overrides, "longitude")}
+      ></TextField>
+      <TextField
+        label="Latitude"
+        isRequired={false}
+        isReadOnly={false}
+        value={latitude}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              name,
+              petType,
+              description,
+              city,
+              state,
+              email,
+              image,
+              longitude,
+              latitude: value,
+            };
+            const result = onChange(modelFields);
+            value = result?.latitude ?? value;
+          }
+          if (errors.latitude?.hasError) {
+            runValidationTasks("latitude", value);
+          }
+          setLatitude(value);
+        }}
+        onBlur={() => runValidationTasks("latitude", latitude)}
+        errorMessage={errors.latitude?.errorMessage}
+        hasError={errors.latitude?.hasError}
+        {...getOverrideProps(overrides, "latitude")}
       ></TextField>
       <Flex
         justifyContent="space-between"

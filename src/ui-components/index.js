@@ -8,5 +8,3 @@ export { default as studioTheme } from "./studioTheme";
 export { default as Pet } from "./Pet";
 export { default as PetCreateForm } from "./PetCreateForm";
 export { default as PetUpdateForm } from "./PetUpdateForm";
-export { default as NoteCreateForm } from "./NoteCreateForm";
-export { default as NoteUpdateForm } from "./NoteUpdateForm";
